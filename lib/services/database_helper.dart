@@ -1,8 +1,3 @@
-// lib/services/database_helper.dart
-// ─────────────────────────────────────────────
-// SQLite database: schema, CRUD, and seed data
-// ─────────────────────────────────────────────
-
 import 'dart:convert';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
@@ -29,7 +24,7 @@ class DatabaseHelper {
   // ── Init & Schema ─────────────────────────────
   Future<Database> _initDatabase() async {
     final dbPath = await getDatabasesPath();
-    final path   = join(dbPath, 'watchhub.db');
+    final path = join(dbPath, 'watchhub.db');
 
     return await openDatabase(
       path,
@@ -148,156 +143,252 @@ class DatabaseHelper {
         'name': 'Submariner Date',
         'brand': 'Rolex',
         'category': 'Dive',
-        'description': 'The iconic Rolex Submariner, the reference among divers\' watches. Waterproof to 300 metres, it features a unidirectional rotatable bezel and luminescent display.',
-        'image_url': 'https://images.unsplash.com/photo-1547996160-81dfa63595aa?w=500',
+        'description':
+            'The iconic Rolex Submariner, the reference among divers\' watches. Waterproof to 300 metres, it features a unidirectional rotatable bezel and luminescent display.',
+        'image_url':
+            'https://images.unsplash.com/photo-1547996160-81dfa63595aa?w=500',
         'price': 10550.0,
         'stock': 8,
         'rating': 4.9,
         'review_count': 234,
-        'specs': jsonEncode({'Case': '41mm', 'Material': 'Oystersteel', 'Movement': 'Automatic', 'Water Resistance': '300m', 'Crystal': 'Sapphire'}),
+        'specs': jsonEncode({
+          'Case': '41mm',
+          'Material': 'Oystersteel',
+          'Movement': 'Automatic',
+          'Water Resistance': '300m',
+          'Crystal': 'Sapphire'
+        }),
         'is_featured': 1,
       },
       {
         'name': 'Seamaster Diver 300M',
         'brand': 'Omega',
         'category': 'Dive',
-        'description': 'The Seamaster Diver 300M is a true diver\'s watch, water resistant to 300 metres, with a ceramic bezel and co-axial escapement.',
-        'image_url': 'https://images.unsplash.com/photo-1523170335258-f5ed11844a49?w=500',
+        'description':
+            'The Seamaster Diver 300M is a true diver\'s watch, water resistant to 300 metres, with a ceramic bezel and co-axial escapement.',
+        'image_url':
+            'https://images.unsplash.com/photo-1523170335258-f5ed11844a49?w=500',
         'price': 5200.0,
         'stock': 15,
         'rating': 4.8,
         'review_count': 189,
-        'specs': jsonEncode({'Case': '42mm', 'Material': 'Stainless Steel', 'Movement': 'Co-Axial', 'Water Resistance': '300m', 'Crystal': 'Sapphire'}),
+        'specs': jsonEncode({
+          'Case': '42mm',
+          'Material': 'Stainless Steel',
+          'Movement': 'Co-Axial',
+          'Water Resistance': '300m',
+          'Crystal': 'Sapphire'
+        }),
         'is_featured': 1,
       },
       {
         'name': 'Carrera Chronograph',
         'brand': 'Tag Heuer',
         'category': 'Chronograph',
-        'description': 'A legend born on the racetrack. The TAG Heuer Carrera is the ultimate sports watch for those who live to push boundaries.',
-        'image_url': 'https://images.unsplash.com/photo-1539874754764-5a96559165b0?w=500',
+        'description':
+            'A legend born on the racetrack. The TAG Heuer Carrera is the ultimate sports watch for those who live to push boundaries.',
+        'image_url':
+            'https://images.unsplash.com/photo-1539874754764-5a96559165b0?w=500',
         'price': 3450.0,
         'stock': 20,
         'rating': 4.7,
         'review_count': 145,
-        'specs': jsonEncode({'Case': '44mm', 'Material': 'Titanium', 'Movement': 'Automatic', 'Water Resistance': '100m', 'Crystal': 'Sapphire'}),
+        'specs': jsonEncode({
+          'Case': '44mm',
+          'Material': 'Titanium',
+          'Movement': 'Automatic',
+          'Water Resistance': '100m',
+          'Crystal': 'Sapphire'
+        }),
         'is_featured': 1,
       },
       {
         'name': 'Prospex Sea SRPD21',
         'brand': 'Seiko',
         'category': 'Dive',
-        'description': 'Seiko Prospex Turtle Re-edition. A reliable automatic diver\'s watch with impressive depth rating and Seiko\'s legendary durability.',
-        'image_url': 'https://images.unsplash.com/photo-1612817288484-6f916006741a?w=500',
+        'description':
+            'Seiko Prospex Turtle Re-edition. A reliable automatic diver\'s watch with impressive depth rating and Seiko\'s legendary durability.',
+        'image_url':
+            'https://images.unsplash.com/photo-1612817288484-6f916006741a?w=500',
         'price': 395.0,
         'stock': 42,
         'rating': 4.6,
         'review_count': 312,
-        'specs': jsonEncode({'Case': '45mm', 'Material': 'Stainless Steel', 'Movement': 'Automatic', 'Water Resistance': '200m', 'Crystal': 'Hardlex'}),
+        'specs': jsonEncode({
+          'Case': '45mm',
+          'Material': 'Stainless Steel',
+          'Movement': 'Automatic',
+          'Water Resistance': '200m',
+          'Crystal': 'Hardlex'
+        }),
         'is_featured': 0,
       },
       {
         'name': 'G-Shock GA-2100',
         'brand': 'Casio',
         'category': 'Sport',
-        'description': 'The CasiOak. Ultra-slim carbon core guard structure combines with the iconic G-SHOCK design for an exceptionally slim yet shock-resistant timepiece.',
-        'image_url': 'https://images.unsplash.com/photo-1508057198894-247b23fe5ade?w=500',
+        'description':
+            'The CasiOak. Ultra-slim carbon core guard structure combines with the iconic G-SHOCK design for an exceptionally slim yet shock-resistant timepiece.',
+        'image_url':
+            'https://images.unsplash.com/photo-1508057198894-247b23fe5ade?w=500',
         'price': 99.0,
         'stock': 100,
         'rating': 4.7,
         'review_count': 876,
-        'specs': jsonEncode({'Case': '48.5mm', 'Material': 'Resin', 'Movement': 'Quartz', 'Water Resistance': '200m', 'Crystal': 'Mineral'}),
+        'specs': jsonEncode({
+          'Case': '48.5mm',
+          'Material': 'Resin',
+          'Movement': 'Quartz',
+          'Water Resistance': '200m',
+          'Crystal': 'Mineral'
+        }),
         'is_featured': 0,
       },
       {
         'name': 'Minimalist ME3172',
         'brand': 'Fossil',
         'category': 'Casual',
-        'description': 'Clean, sophisticated design meets everyday reliability. The Fossil Minimalist features a slim profile with premium materials at an accessible price.',
-        'image_url': 'https://images.unsplash.com/photo-1434056886845-dac89ffe9b56?w=500',
+        'description':
+            'Clean, sophisticated design meets everyday reliability. The Fossil Minimalist features a slim profile with premium materials at an accessible price.',
+        'image_url':
+            'https://images.unsplash.com/photo-1434056886845-dac89ffe9b56?w=500',
         'price': 149.0,
         'stock': 55,
         'rating': 4.3,
         'review_count': 421,
-        'specs': jsonEncode({'Case': '40mm', 'Material': 'Stainless Steel', 'Movement': 'Quartz', 'Water Resistance': '50m', 'Crystal': 'Mineral'}),
+        'specs': jsonEncode({
+          'Case': '40mm',
+          'Material': 'Stainless Steel',
+          'Movement': 'Quartz',
+          'Water Resistance': '50m',
+          'Crystal': 'Mineral'
+        }),
         'is_featured': 0,
       },
       {
         'name': 'Promaster BN0150',
         'brand': 'Citizen',
         'category': 'Sport',
-        'description': 'Eco-Drive technology powers this professional dive watch using any light source. Never needs a battery change — truly sustainable luxury.',
-        'image_url': 'https://images.unsplash.com/photo-1569397288884-4d43d6738fbd?w=500',
+        'description':
+            'Eco-Drive technology powers this professional dive watch using any light source. Never needs a battery change — truly sustainable luxury.',
+        'image_url':
+            'https://images.unsplash.com/photo-1569397288884-4d43d6738fbd?w=500',
         'price': 345.0,
         'stock': 33,
         'rating': 4.5,
         'review_count': 267,
-        'specs': jsonEncode({'Case': '44mm', 'Material': 'Stainless Steel', 'Movement': 'Eco-Drive', 'Water Resistance': '200m', 'Crystal': 'Sapphire'}),
+        'specs': jsonEncode({
+          'Case': '44mm',
+          'Material': 'Stainless Steel',
+          'Movement': 'Eco-Drive',
+          'Water Resistance': '200m',
+          'Crystal': 'Sapphire'
+        }),
         'is_featured': 0,
       },
       {
         'name': 'Navitimer B01',
         'brand': 'Breitling',
         'category': 'Chronograph',
-        'description': 'The iconic aviation chronograph. The Navitimer features a circular slide rule allowing pilots to perform various calculations in flight.',
-        'image_url': 'https://images.unsplash.com/photo-1551816230-ef5deaed4a26?w=500',
+        'description':
+            'The iconic aviation chronograph. The Navitimer features a circular slide rule allowing pilots to perform various calculations in flight.',
+        'image_url':
+            'https://images.unsplash.com/photo-1551816230-ef5deaed4a26?w=500',
         'price': 8900.0,
         'stock': 6,
         'rating': 4.8,
         'review_count': 98,
-        'specs': jsonEncode({'Case': '43mm', 'Material': 'Stainless Steel', 'Movement': 'COSC Chronometer', 'Water Resistance': '30m', 'Crystal': 'Sapphire'}),
+        'specs': jsonEncode({
+          'Case': '43mm',
+          'Material': 'Stainless Steel',
+          'Movement': 'COSC Chronometer',
+          'Water Resistance': '30m',
+          'Crystal': 'Sapphire'
+        }),
         'is_featured': 1,
       },
       {
         'name': 'Day-Date 40',
         'brand': 'Rolex',
         'category': 'Luxury',
-        'description': 'The "President\'s Watch". Worn by world leaders since 1956, the Day-Date is available exclusively in 18 ct gold or platinum.',
-        'image_url': 'https://images.unsplash.com/photo-1548169874-53e85f753f1e?w=500',
+        'description':
+            'The "President\'s Watch". Worn by world leaders since 1956, the Day-Date is available exclusively in 18 ct gold or platinum.',
+        'image_url':
+            'https://images.unsplash.com/photo-1548169874-53e85f753f1e?w=500',
         'price': 36550.0,
         'stock': 3,
         'rating': 5.0,
         'review_count': 45,
-        'specs': jsonEncode({'Case': '40mm', 'Material': '18ct Yellow Gold', 'Movement': 'Calibre 3255', 'Water Resistance': '100m', 'Crystal': 'Sapphire'}),
+        'specs': jsonEncode({
+          'Case': '40mm',
+          'Material': '18ct Yellow Gold',
+          'Movement': 'Calibre 3255',
+          'Water Resistance': '100m',
+          'Crystal': 'Sapphire'
+        }),
         'is_featured': 1,
       },
       {
         'name': 'Speedmaster Professional',
         'brand': 'Omega',
         'category': 'Chronograph',
-        'description': 'The Moonwatch. The only watch worn on the Moon and the first watch worn in space. A piece of human history on your wrist.',
-        'image_url': 'https://images.unsplash.com/photo-1587836374828-4dbafa94cf0e?w=500',
+        'description':
+            'The Moonwatch. The only watch worn on the Moon and the first watch worn in space. A piece of human history on your wrist.',
+        'image_url':
+            'https://images.unsplash.com/photo-1587836374828-4dbafa94cf0e?w=500',
         'price': 6350.0,
         'stock': 11,
         'rating': 4.9,
         'review_count': 567,
-        'specs': jsonEncode({'Case': '42mm', 'Material': 'Stainless Steel', 'Movement': 'Manual', 'Water Resistance': '50m', 'Crystal': 'Hesalite'}),
+        'specs': jsonEncode({
+          'Case': '42mm',
+          'Material': 'Stainless Steel',
+          'Movement': 'Manual',
+          'Water Resistance': '50m',
+          'Crystal': 'Hesalite'
+        }),
         'is_featured': 1,
       },
       {
         'name': 'PRW-6600Y-1A',
         'brand': 'Casio',
         'category': 'Sport',
-        'description': 'Triple Sensor Pathfinder. Features altitude, barometric pressure, temperature, and compass direction — the ultimate outdoor tool watch.',
-        'image_url': 'https://images.unsplash.com/photo-1590736969596-a0d9d6cdd4b7?w=500',
+        'description':
+            'Triple Sensor Pathfinder. Features altitude, barometric pressure, temperature, and compass direction — the ultimate outdoor tool watch.',
+        'image_url':
+            'https://images.unsplash.com/photo-1590736969596-a0d9d6cdd4b7?w=500',
         'price': 180.0,
         'stock': 28,
         'rating': 4.5,
         'review_count': 203,
-        'specs': jsonEncode({'Case': '50mm', 'Material': 'Resin/Titanium', 'Movement': 'Solar Quartz', 'Water Resistance': '100m', 'Crystal': 'Mineral'}),
+        'specs': jsonEncode({
+          'Case': '50mm',
+          'Material': 'Resin/Titanium',
+          'Movement': 'Solar Quartz',
+          'Water Resistance': '100m',
+          'Crystal': 'Mineral'
+        }),
         'is_featured': 0,
       },
       {
         'name': 'Aquaracer Professional',
         'brand': 'Tag Heuer',
         'category': 'Dive',
-        'description': 'Born to dive, designed to perform. The Aquaracer Professional 300 features a ceramic unidirectional bezel and automatic movement.',
-        'image_url': 'https://images.unsplash.com/photo-1594534475808-b18fc33b045e?w=500',
+        'description':
+            'Born to dive, designed to perform. The Aquaracer Professional 300 features a ceramic unidirectional bezel and automatic movement.',
+        'image_url':
+            'https://images.unsplash.com/photo-1594534475808-b18fc33b045e?w=500',
         'price': 1650.0,
         'stock': 22,
         'rating': 4.6,
         'review_count': 178,
-        'specs': jsonEncode({'Case': '43mm', 'Material': 'Stainless Steel', 'Movement': 'Automatic', 'Water Resistance': '300m', 'Crystal': 'Sapphire'}),
+        'specs': jsonEncode({
+          'Case': '43mm',
+          'Material': 'Stainless Steel',
+          'Movement': 'Automatic',
+          'Water Resistance': '300m',
+          'Crystal': 'Sapphire'
+        }),
         'is_featured': 0,
       },
     ];
@@ -308,15 +399,15 @@ class DatabaseHelper {
 
     // Seed admin user (password: admin123)
     await db.insert('users', {
-      'name':          'Admin User',
-      'email':         'admin@watchhub.com',
+      'name': 'Admin User',
+      'email': 'admin@watchhub.com',
       'password_hash': 'admin123', // In production, use bcrypt
-      'phone':         '+1234567890',
-      'address':       '123 Watch Street',
-      'city':          'New York',
-      'country':       'USA',
-      'is_admin':      1,
-      'created_at':    now,
+      'phone': '+1234567890',
+      'address': '123 Watch Street',
+      'city': 'New York',
+      'country': 'USA',
+      'is_admin': 1,
+      'created_at': now,
     });
   }
 
@@ -379,9 +470,9 @@ class DatabaseHelper {
     String? sortBy,
     bool featuredOnly = false,
   }) async {
-    final db   = await database;
+    final db = await database;
     final where = <String>[];
-    final args  = <dynamic>[];
+    final args = <dynamic>[];
 
     if (brand != null && brand != 'All') {
       where.add('brand = ?');
@@ -410,16 +501,25 @@ class DatabaseHelper {
 
     String? orderBy;
     switch (sortBy) {
-      case 'Price: Low to High':  orderBy = 'price ASC';   break;
-      case 'Price: High to Low':  orderBy = 'price DESC';  break;
-      case 'Rating: High to Low': orderBy = 'rating DESC'; break;
-      case 'Name: A to Z':        orderBy = 'name ASC';    break;
-      default:                    orderBy = 'is_featured DESC, id ASC';
+      case 'Price: Low to High':
+        orderBy = 'price ASC';
+        break;
+      case 'Price: High to Low':
+        orderBy = 'price DESC';
+        break;
+      case 'Rating: High to Low':
+        orderBy = 'rating DESC';
+        break;
+      case 'Name: A to Z':
+        orderBy = 'name ASC';
+        break;
+      default:
+        orderBy = 'is_featured DESC, id ASC';
     }
 
     final rows = await db.query(
       'watches',
-      where:   where.isNotEmpty ? where.join(' AND ') : null,
+      where: where.isNotEmpty ? where.join(' AND ') : null,
       whereArgs: args.isNotEmpty ? args : null,
       orderBy: orderBy,
     );
@@ -428,15 +528,14 @@ class DatabaseHelper {
 
   /// Get watch by id.
   Future<Watch?> getWatchById(int id) async {
-    final db   = await database;
+    final db = await database;
     final rows = await db.query('watches', where: 'id = ?', whereArgs: [id]);
     if (rows.isEmpty) return null;
     return Watch.fromMap(rows.first);
   }
 
   /// Get featured watches.
-  Future<List<Watch>> getFeaturedWatches() =>
-      getWatches(featuredOnly: true);
+  Future<List<Watch>> getFeaturedWatches() => getWatches(featuredOnly: true);
 
   /// Insert / update watch (admin).
   Future<int> upsertWatch(Watch watch) async {
@@ -460,7 +559,7 @@ class DatabaseHelper {
   // ══════════════════════════════════════════════
 
   Future<List<CartItem>> getCartItems(int userId) async {
-    final db   = await database;
+    final db = await database;
     final rows = await db.query(
       'cart',
       where: 'user_id = ?',
@@ -493,7 +592,7 @@ class DatabaseHelper {
       );
     } else {
       await db.insert('cart', {
-        'user_id':  userId,
+        'user_id': userId,
         'watch_id': watchId,
         'quantity': qty,
         'added_at': DateTime.now().toIso8601String(),
@@ -522,7 +621,7 @@ class DatabaseHelper {
   }
 
   Future<int> getCartCount(int userId) async {
-    final db   = await database;
+    final db = await database;
     final rows = await db.rawQuery(
       'SELECT SUM(quantity) as total FROM cart WHERE user_id = ?',
       [userId],
@@ -535,7 +634,7 @@ class DatabaseHelper {
   // ══════════════════════════════════════════════
 
   Future<List<WishlistItem>> getWishlistItems(int userId) async {
-    final db   = await database;
+    final db = await database;
     final rows = await db.query(
       'wishlist',
       where: 'user_id = ?',
@@ -551,7 +650,7 @@ class DatabaseHelper {
   }
 
   Future<bool> isInWishlist(int userId, int watchId) async {
-    final db   = await database;
+    final db = await database;
     final rows = await db.query(
       'wishlist',
       where: 'user_id = ? AND watch_id = ?',
@@ -561,15 +660,14 @@ class DatabaseHelper {
   }
 
   Future<void> toggleWishlist(int userId, int watchId) async {
-    final db      = await database;
-    final inList  = await isInWishlist(userId, watchId);
+    final db = await database;
+    final inList = await isInWishlist(userId, watchId);
     if (inList) {
       await db.delete('wishlist',
-          where: 'user_id = ? AND watch_id = ?',
-          whereArgs: [userId, watchId]);
+          where: 'user_id = ? AND watch_id = ?', whereArgs: [userId, watchId]);
     } else {
       await db.insert('wishlist', {
-        'user_id':  userId,
+        'user_id': userId,
         'watch_id': watchId,
         'added_at': DateTime.now().toIso8601String(),
       });
@@ -581,7 +679,7 @@ class DatabaseHelper {
   // ══════════════════════════════════════════════
 
   Future<List<OrderItem>> getOrdersByUser(int userId) async {
-    final db   = await database;
+    final db = await database;
     final rows = await db.query(
       'orders',
       where: 'user_id = ?',
@@ -597,7 +695,7 @@ class DatabaseHelper {
   }
 
   Future<List<OrderItem>> getAllOrders() async {
-    final db   = await database;
+    final db = await database;
     final rows = await db.query('orders', orderBy: 'ordered_at DESC');
     final orders = <OrderItem>[];
     for (final row in rows) {
@@ -609,21 +707,21 @@ class DatabaseHelper {
 
   /// Place order from cart items. Returns order ids.
   Future<List<int>> placeOrder(int userId, String shippingAddress) async {
-    final db       = await database;
+    final db = await database;
     final cartItems = await getCartItems(userId);
-    final orderIds  = <int>[];
-    final now       = DateTime.now().toIso8601String();
+    final orderIds = <int>[];
+    final now = DateTime.now().toIso8601String();
 
     for (final item in cartItems) {
       if (item.watch == null) continue;
       final id = await db.insert('orders', {
-        'user_id':          userId,
-        'watch_id':         item.watchId,
-        'quantity':         item.quantity,
-        'unit_price':       item.watch!.price,
-        'status':           'pending',
+        'user_id': userId,
+        'watch_id': item.watchId,
+        'quantity': item.quantity,
+        'unit_price': item.watch!.price,
+        'status': 'pending',
         'shipping_address': shippingAddress,
-        'ordered_at':       now,
+        'ordered_at': now,
       });
       orderIds.add(id);
       // Decrement stock
@@ -650,10 +748,17 @@ class DatabaseHelper {
     final db = await database;
     String orderBy;
     switch (sortBy) {
-      case 'Most Helpful': orderBy = 'helpful_count DESC'; break;
-      case 'Highest Rating': orderBy = 'rating DESC';      break;
-      case 'Lowest Rating':  orderBy = 'rating ASC';       break;
-      default:               orderBy = 'created_at DESC';
+      case 'Most Helpful':
+        orderBy = 'helpful_count DESC';
+        break;
+      case 'Highest Rating':
+        orderBy = 'rating DESC';
+        break;
+      case 'Lowest Rating':
+        orderBy = 'rating ASC';
+        break;
+      default:
+        orderBy = 'created_at DESC';
     }
     final rows = await db.query(
       'reviews',
@@ -665,7 +770,7 @@ class DatabaseHelper {
   }
 
   Future<bool> hasUserReviewed(int userId, int watchId) async {
-    final db   = await database;
+    final db = await database;
     final rows = await db.query(
       'reviews',
       where: 'user_id = ? AND watch_id = ?',
@@ -711,14 +816,22 @@ class DatabaseHelper {
 
   Future<Map<String, int>> getAdminStats() async {
     final db = await database;
-    final userCount  = Sqflite.firstIntValue(await db.rawQuery('SELECT COUNT(*) FROM users WHERE is_admin = 0')) ?? 0;
-    final watchCount = Sqflite.firstIntValue(await db.rawQuery('SELECT COUNT(*) FROM watches'))               ?? 0;
-    final orderCount = Sqflite.firstIntValue(await db.rawQuery('SELECT COUNT(*) FROM orders'))                ?? 0;
-    final reviewCount= Sqflite.firstIntValue(await db.rawQuery('SELECT COUNT(*) FROM reviews'))               ?? 0;
+    final userCount = Sqflite.firstIntValue(await db
+            .rawQuery('SELECT COUNT(*) FROM users WHERE is_admin = 0')) ??
+        0;
+    final watchCount = Sqflite.firstIntValue(
+            await db.rawQuery('SELECT COUNT(*) FROM watches')) ??
+        0;
+    final orderCount = Sqflite.firstIntValue(
+            await db.rawQuery('SELECT COUNT(*) FROM orders')) ??
+        0;
+    final reviewCount = Sqflite.firstIntValue(
+            await db.rawQuery('SELECT COUNT(*) FROM reviews')) ??
+        0;
     return {
-      'users':   userCount,
+      'users': userCount,
       'watches': watchCount,
-      'orders':  orderCount,
+      'orders': orderCount,
       'reviews': reviewCount,
     };
   }

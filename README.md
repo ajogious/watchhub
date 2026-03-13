@@ -1,4 +1,5 @@
 # WatchHub 🕐
+
 ### Luxury Watch Shopping App
 
 A premium Flutter mobile application for browsing and purchasing high-end watches.
@@ -22,34 +23,35 @@ A premium Flutter mobile application for browsing and purchasing high-end watche
 
 ## 🛠️ Tech Stack
 
-| Technology | Usage |
-|---|---|
-| Flutter / Dart | UI framework |
-| SQLite (sqflite) | Local database |
-| Provider | State management |
-| shared_preferences | Session persistence |
-| cached_network_image | Image caching |
-| carousel_slider | Banner carousel |
-| flutter_rating_bar | Star ratings |
+| Technology           | Usage               |
+| -------------------- | ------------------- |
+| Flutter / Dart       | UI framework        |
+| SQLite (sqflite)     | Local database      |
+| Provider             | State management    |
+| shared_preferences   | Session persistence |
+| cached_network_image | Image caching       |
+| carousel_slider      | Banner carousel     |
+| flutter_rating_bar   | Star ratings        |
 
 ---
 
 ## 🗄️ Database Schema
 
-| Table | Description |
-|---|---|
-| `users` | User accounts and profiles |
-| `watches` | Watch catalog with specs |
-| `cart` | Shopping cart items |
-| `wishlist` | Saved/favourite watches |
-| `orders` | Placed orders |
-| `reviews` | User reviews and ratings |
+| Table      | Description                |
+| ---------- | -------------------------- |
+| `users`    | User accounts and profiles |
+| `watches`  | Watch catalog with specs   |
+| `cart`     | Shopping cart items        |
+| `wishlist` | Saved/favourite watches    |
+| `orders`   | Placed orders              |
+| `reviews`  | User reviews and ratings   |
 
 ---
 
 ## 🚀 Getting Started
 
 ### Prerequisites
+
 - Flutter SDK ≥ 3.0.0
 - Dart ≥ 3.0.0
 - Android Studio / VS Code
@@ -72,6 +74,7 @@ flutter build apk --release
 ```
 
 ### Demo Credentials
+
 ```
 Email:    admin@watchhub.com
 Password: admin123
@@ -120,15 +123,3 @@ lib/
 ```
 
 ---
-
-## 👥 Team
-
-| Student ID | Name |
-|---|---|
-| Student1706374 | Zainab Umar Idris |
-| Student1586464 | Cassandra Oziohu Naanzem Onotu |
-| Student1701656 | Nuel Kasie Emeribe |
-
-**Course:** Sem-3 eProject  
-**Institution:** Aptech  
-**Submission Date:** 17 March 2026

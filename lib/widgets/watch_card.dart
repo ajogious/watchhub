@@ -1,4 +1,3 @@
-// lib/widgets/watch_card.dart
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../models/watch.dart';
@@ -13,16 +12,16 @@ class WatchCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final auth      = context.watch<AuthProvider>();
-    final wishlist  = context.watch<WishlistProvider>();
+    final auth = context.watch<AuthProvider>();
+    final wishlist = context.watch<WishlistProvider>();
     final inWishlist = wishlist.isWishlisted(watch.id ?? -1);
 
     return GestureDetector(
-      onTap: () => Navigator.of(context)
-          .pushNamed('/product', arguments: watch.id),
+      onTap: () =>
+          Navigator.of(context).pushNamed('/product', arguments: watch.id),
       child: Container(
         decoration: BoxDecoration(
-          color:        AppColors.darkCard,
+          color: AppColors.darkCard,
           borderRadius: BorderRadius.circular(AppRadius.md),
           border: Border.all(color: AppColors.divider),
         ),
@@ -38,9 +37,9 @@ class WatchCard extends StatelessWidget {
                         top: Radius.circular(AppRadius.md)),
                     child: Image.network(
                       watch.imageUrl,
-                      width:  double.infinity,
+                      width: double.infinity,
                       height: double.infinity,
-                      fit:    BoxFit.cover,
+                      fit: BoxFit.cover,
                       errorBuilder: (_, __, ___) => Container(
                         color: AppColors.darkSurface,
                         child: const Center(
@@ -57,8 +56,9 @@ class WatchCard extends StatelessWidget {
                     child: GestureDetector(
                       onTap: () async {
                         if (auth.userId == null) {
-                          AppHelpers.showSnackBar(context,
-                              'Please login to add to wishlist', isError: true);
+                          AppHelpers.showSnackBar(
+                              context, 'Please login to add to wishlist',
+                              isError: true);
                           return;
                         }
                         await wishlist.toggle(auth.userId!, watch.id!);
@@ -80,8 +80,10 @@ class WatchCard extends StatelessWidget {
                         ),
                         child: Icon(
                           inWishlist ? Icons.favorite : Icons.favorite_outline,
-                          size:  16,
-                          color: inWishlist ? AppColors.error : AppColors.textSecondary,
+                          size: 16,
+                          color: inWishlist
+                              ? AppColors.error
+                              : AppColors.textSecondary,
                         ),
                       ),
                     ),
@@ -123,8 +125,8 @@ class WatchCard extends StatelessWidget {
                   Text(watch.name,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                      style: AppTextStyles.bodyMedium.copyWith(
-                          color: AppColors.textPrimary)),
+                      style: AppTextStyles.bodyMedium
+                          .copyWith(color: AppColors.textPrimary)),
                   const SizedBox(height: AppSpacing.xs),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,

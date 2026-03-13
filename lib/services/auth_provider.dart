@@ -1,8 +1,3 @@
-// lib/services/auth_provider.dart
-// ─────────────────────────────────────────────
-// Authentication state using Provider pattern
-// ─────────────────────────────────────────────
-
 import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../models/user.dart';
@@ -12,15 +7,15 @@ class AuthProvider extends ChangeNotifier {
   final DatabaseHelper _db = DatabaseHelper();
 
   AppUser? _currentUser;
-  bool     _isLoading = false;
-  String?  _error;
+  bool _isLoading = false;
+  String? _error;
 
-  AppUser? get currentUser  => _currentUser;
-  bool     get isLoading    => _isLoading;
-  String?  get error        => _error;
-  bool     get isLoggedIn   => _currentUser != null;
-  bool     get isAdmin      => _currentUser?.isAdmin ?? false;
-  int?     get userId       => _currentUser?.id;
+  AppUser? get currentUser => _currentUser;
+  bool get isLoading => _isLoading;
+  String? get error => _error;
+  bool get isLoggedIn => _currentUser != null;
+  bool get isAdmin => _currentUser?.isAdmin ?? false;
+  int? get userId => _currentUser?.id;
 
   // ── Restore session on app start ──────────────
   Future<void> restoreSession() async {
@@ -41,8 +36,8 @@ class AuthProvider extends ChangeNotifier {
     _setLoading(true);
     try {
       final user = AppUser(
-        name:         name,
-        email:        email.trim().toLowerCase(),
+        name: name,
+        email: email.trim().toLowerCase(),
         passwordHash: password, // In production: hash this
       );
       final id = await _db.registerUser(user);

@@ -1,8 +1,3 @@
-// lib/screens/main_nav_screen.dart
-// ─────────────────────────────────────────────
-// Bottom navigation shell: Home | Browse | Wishlist | Profile
-// ─────────────────────────────────────────────
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../services/auth_provider.dart';
@@ -57,15 +52,15 @@ class _MainNavScreenState extends State<MainNavScreen> {
       ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedIndex,
-        onTap:        (i) => setState(() => _selectedIndex = i),
+        onTap: (i) => setState(() => _selectedIndex = i),
         items: [
           const BottomNavigationBarItem(
-            icon:  Icon(Icons.home_outlined),
+            icon: Icon(Icons.home_outlined),
             activeIcon: Icon(Icons.home),
             label: 'Home',
           ),
           const BottomNavigationBarItem(
-            icon:  Icon(Icons.grid_view_outlined),
+            icon: Icon(Icons.grid_view_outlined),
             activeIcon: Icon(Icons.grid_view),
             label: 'Browse',
           ),
@@ -76,7 +71,8 @@ class _MainNavScreenState extends State<MainNavScreen> {
                 const Icon(Icons.shopping_cart_outlined),
                 if (cartCount > 0)
                   Positioned(
-                    top: -4, right: -6,
+                    top: -4,
+                    right: -6,
                     child: Container(
                       padding: const EdgeInsets.all(2),
                       decoration: const BoxDecoration(
@@ -84,7 +80,8 @@ class _MainNavScreenState extends State<MainNavScreen> {
                         shape: BoxShape.circle,
                       ),
                       constraints: const BoxConstraints(
-                        minWidth: 16, minHeight: 16,
+                        minWidth: 16,
+                        minHeight: 16,
                       ),
                       child: Text(
                         cartCount > 9 ? '9+' : '$cartCount',
@@ -103,12 +100,12 @@ class _MainNavScreenState extends State<MainNavScreen> {
             label: 'Cart',
           ),
           const BottomNavigationBarItem(
-            icon:  Icon(Icons.favorite_outline),
+            icon: Icon(Icons.favorite_outline),
             activeIcon: Icon(Icons.favorite),
             label: 'Wishlist',
           ),
           const BottomNavigationBarItem(
-            icon:  Icon(Icons.person_outline),
+            icon: Icon(Icons.person_outline),
             activeIcon: Icon(Icons.person),
             label: 'Profile',
           ),

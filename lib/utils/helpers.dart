@@ -1,8 +1,3 @@
-// lib/utils/helpers.dart
-// ─────────────────────────────────────────────
-// Utility functions used across the app
-// ─────────────────────────────────────────────
-
 import 'package:flutter/material.dart';
 import 'constants.dart';
 
@@ -11,9 +6,9 @@ class AppHelpers {
   static String formatPrice(double price) {
     if (price >= 1000) {
       return '\$${price.toStringAsFixed(0).replaceAllMapped(
-        RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'),
-        (Match m) => '${m[1]},',
-      )}';
+            RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'),
+            (Match m) => '${m[1]},',
+          )}';
     }
     return '\$${price.toStringAsFixed(2)}';
   }
@@ -23,8 +18,18 @@ class AppHelpers {
     try {
       final dt = DateTime.parse(isoDate);
       const months = [
-        'Jan','Feb','Mar','Apr','May','Jun',
-        'Jul','Aug','Sep','Oct','Nov','Dec',
+        'Jan',
+        'Feb',
+        'Mar',
+        'Apr',
+        'May',
+        'Jun',
+        'Jul',
+        'Aug',
+        'Sep',
+        'Oct',
+        'Nov',
+        'Dec',
       ];
       return '${months[dt.month - 1]} ${dt.day}, ${dt.year}';
     } catch (_) {
@@ -45,12 +50,16 @@ class AppHelpers {
         content: Row(
           children: [
             Icon(
-              isError   ? Icons.error_outline
-              : isSuccess ? Icons.check_circle_outline
-              : Icons.info_outline,
-              color: isError   ? AppColors.error
-                   : isSuccess ? AppColors.success
-                   : AppColors.primaryLight,
+              isError
+                  ? Icons.error_outline
+                  : isSuccess
+                      ? Icons.check_circle_outline
+                      : Icons.info_outline,
+              color: isError
+                  ? AppColors.error
+                  : isSuccess
+                      ? AppColors.success
+                      : AppColors.primaryLight,
               size: 20,
             ),
             const SizedBox(width: AppSpacing.sm),
@@ -74,7 +83,8 @@ class AppHelpers {
   }
 
   // ── Show loading dialog ────────────────────────
-  static void showLoadingDialog(BuildContext context, {String message = 'Please wait...'}) {
+  static void showLoadingDialog(BuildContext context,
+      {String message = 'Please wait...'}) {
     showDialog(
       context: context,
       barrierDismissible: false,
@@ -103,9 +113,9 @@ class AppHelpers {
     BuildContext context, {
     required String title,
     required String message,
-    String confirmText  = 'Confirm',
-    String cancelText   = 'Cancel',
-    bool isDangerous    = false,
+    String confirmText = 'Confirm',
+    String cancelText = 'Cancel',
+    bool isDangerous = false,
   }) async {
     final result = await showDialog<bool>(
       context: context,
@@ -159,16 +169,16 @@ class AppHelpers {
 
   // ── Get stock label ───────────────────────────
   static String getStockLabel(int stock) {
-    if (stock == 0)  return 'Out of Stock';
-    if (stock <= 5)  return 'Only $stock left!';
+    if (stock == 0) return 'Out of Stock';
+    if (stock <= 5) return 'Only $stock left!';
     if (stock <= 20) return 'Low Stock';
     return 'In Stock';
   }
 
   // ── Get stock color ───────────────────────────
   static Color getStockColor(int stock) {
-    if (stock == 0)  return AppColors.error;
-    if (stock <= 5)  return AppColors.warning;
+    if (stock == 0) return AppColors.error;
+    if (stock <= 5) return AppColors.warning;
     return AppColors.success;
   }
 }

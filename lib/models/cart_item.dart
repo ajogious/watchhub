@@ -1,15 +1,10 @@
-// lib/models/cart_item.dart
-// ─────────────────────────────────────────────
-// Cart item model with SQLite serialization
-// ─────────────────────────────────────────────
-
 import 'watch.dart';
 
 class CartItem {
-  final int?  id;
-  final int   userId;
-  final int   watchId;
-  int         quantity;
+  final int? id;
+  final int userId;
+  final int watchId;
+  int quantity;
   final String addedAt;
 
   // Populated via JOIN (not stored in cart table)
@@ -31,7 +26,7 @@ class CartItem {
   Map<String, dynamic> toMap() {
     return {
       if (id != null) 'id': id,
-      'user_id':  userId,
+      'user_id': userId,
       'watch_id': watchId,
       'quantity': quantity,
       'added_at': addedAt,
@@ -41,27 +36,27 @@ class CartItem {
   // ── Create from SQLite map ────────────────────
   factory CartItem.fromMap(Map<String, dynamic> map, {Watch? watch}) {
     return CartItem(
-      id:       map['id'] as int?,
-      userId:   map['user_id'] as int,
-      watchId:  map['watch_id'] as int,
+      id: map['id'] as int?,
+      userId: map['user_id'] as int,
+      watchId: map['watch_id'] as int,
       quantity: map['quantity'] as int,
-      addedAt:  map['added_at'] as String,
-      watch:    watch,
+      addedAt: map['added_at'] as String,
+      watch: watch,
     );
   }
 
   CartItem copyWith({int? quantity, Watch? watch}) {
     return CartItem(
-      id:       id,
-      userId:   userId,
-      watchId:  watchId,
+      id: id,
+      userId: userId,
+      watchId: watchId,
       quantity: quantity ?? this.quantity,
-      addedAt:  addedAt,
-      watch:    watch ?? this.watch,
+      addedAt: addedAt,
+      watch: watch ?? this.watch,
     );
   }
 
   @override
   String toString() =>
-    'CartItem(watchId: $watchId, qty: $quantity, total: \$${totalPrice.toStringAsFixed(2)})';
+      'CartItem(watchId: $watchId, qty: $quantity, total: \$${totalPrice.toStringAsFixed(2)})';
 }

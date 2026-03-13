@@ -1,4 +1,3 @@
-// lib/screens/home_screen.dart
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:provider/provider.dart';
@@ -101,8 +100,8 @@ class _HomeScreenState extends State<HomeScreen> {
                       CarouselSlider.builder(
                         itemCount: _banners.length,
                         itemBuilder: (_, i, __) => _BannerCard(
-                          title: _banners[i]['title']! as String,
-                          sub: _banners[i]['sub']! as String,
+                          title: _banners[i]['title'] as String,
+                          sub: _banners[i]['sub'] as String,
                           color: Color(_banners[i]['color'] as int),
                         ),
                         options: CarouselOptions(

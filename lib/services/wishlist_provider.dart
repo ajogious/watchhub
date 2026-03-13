@@ -1,8 +1,3 @@
-// lib/services/wishlist_provider.dart
-// ─────────────────────────────────────────────
-// Wishlist state management
-// ─────────────────────────────────────────────
-
 import 'package:flutter/foundation.dart';
 import '../models/wishlist_item.dart';
 import 'database_helper.dart';
@@ -10,12 +5,12 @@ import 'database_helper.dart';
 class WishlistProvider extends ChangeNotifier {
   final DatabaseHelper _db = DatabaseHelper();
 
-  List<WishlistItem> _items    = [];
-  bool               _isLoading = false;
+  List<WishlistItem> _items = [];
+  bool _isLoading = false;
 
-  List<WishlistItem> get items     => _items;
-  bool               get isLoading => _isLoading;
-  int                get count     => _items.length;
+  List<WishlistItem> get items => _items;
+  bool get isLoading => _isLoading;
+  int get count => _items.length;
 
   // ── Load wishlist ─────────────────────────────
   Future<void> loadWishlist(int userId) async {

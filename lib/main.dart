@@ -23,6 +23,9 @@ import 'screens/product_detail_screen.dart';
 import 'screens/checkout_screen.dart';
 import 'screens/order_history_screen.dart';
 import 'screens/admin_screen.dart';
+import 'screens/reviews_screen.dart';
+import 'screens/support_screen.dart';
+import 'screens/feedback_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -71,6 +74,8 @@ class WatchHubApp extends StatelessWidget {
           '/checkout':       (_) => const CheckoutScreen(),
           '/order-history':  (_) => const OrderHistoryScreen(),
           '/admin':          (_) => const AdminScreen(),
+          '/support':        (_) => const SupportScreen(),
+          '/feedback':       (_) => const FeedbackScreen(),
         },
 
         // ── Route with arguments ─────────────────
@@ -79,6 +84,15 @@ class WatchHubApp extends StatelessWidget {
             final watchId = settings.arguments as int;
             return MaterialPageRoute(
               builder: (_) => ProductDetailScreen(watchId: watchId),
+            );
+          }
+          if (settings.name == '/reviews') {
+            final args = settings.arguments as Map<String, dynamic>;
+            return MaterialPageRoute(
+              builder: (_) => ReviewsScreen(
+                watchId: args['watchId'] as int,
+                watch:   args['watch'],
+              ),
             );
           }
           return null;

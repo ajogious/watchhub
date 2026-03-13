@@ -1,4 +1,3 @@
-// lib/screens/product_detail_screen.dart
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -20,12 +19,12 @@ class ProductDetailScreen extends StatefulWidget {
 }
 
 class _ProductDetailScreenState extends State<ProductDetailScreen> {
-  final _db      = DatabaseHelper();
-  Watch?         _watch;
-  List<Review>   _reviews  = [];
-  bool           _loading  = true;
-  bool           _addingCart = false;
-  double         _userRating = 0;
+  final _db = DatabaseHelper();
+  Watch? _watch;
+  List<Review> _reviews = [];
+  bool _loading = true;
+  bool _addingCart = false;
+  double _userRating = 0;
   final _reviewCtrl = TextEditingController();
   String _reviewSort = 'Newest';
 
@@ -42,9 +41,15 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
   }
 
   Future<void> _load() async {
-    final watch   = await _db.getWatchById(widget.watchId);
-    final reviews = await _db.getReviewsByWatch(widget.watchId, sortBy: _reviewSort);
-    if (mounted) setState(() { _watch = watch; _reviews = reviews; _loading = false; });
+    final watch = await _db.getWatchById(widget.watchId);
+    final reviews =
+        await _db.getReviewsByWatch(widget.watchId, sortBy: _reviewSort);
+    if (mounted)
+      setState(() {
+        _watch = watch;
+        _reviews = reviews;
+        _loading = false;
+      });
   }
 
   Future<void> _addToCart() async {
@@ -79,36 +84,41 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
         await _db.hasUserReviewed(auth.userId!, widget.watchId);
     if (!mounted) return;
     if (alreadyReviewed) {
-      AppHelpers.showSnackBar(context, 'You already reviewed this watch', isError: true);
+      AppHelpers.showSnackBar(context, 'You already reviewed this watch',
+          isError: true);
       return;
     }
     await _db.addReview(Review(
-      userId:   auth.userId!,
-      watchId:  widget.watchId,
-      rating:   _userRating,
-      comment:  _reviewCtrl.text.trim(),
+      userId: auth.userId!,
+      watchId: widget.watchId,
+      rating: _userRating,
+      comment: _reviewCtrl.text.trim(),
       userName: auth.currentUser!.name,
     ));
     _reviewCtrl.clear();
     setState(() => _userRating = 0);
     await _load();
-    if (mounted) AppHelpers.showSnackBar(context, 'Review submitted!', isSuccess: true);
+    if (mounted)
+      AppHelpers.showSnackBar(context, 'Review submitted!', isSuccess: true);
   }
 
   @override
   Widget build(BuildContext context) {
     if (_loading || _watch == null) {
       return const Scaffold(
-        body: Center(child: CircularProgressIndicator(color: AppColors.primaryLight)),
+        body: Center(
+            child: CircularProgressIndicator(color: AppColors.primaryLight)),
       );
     }
 
-    final watch    = _watch!;
-    final auth     = context.watch<AuthProvider>();
+    final watch = _watch!;
+    final auth = context.watch<AuthProvider>();
     final wishlist = context.watch<WishlistProvider>();
-    final inWish   = wishlist.isWishlisted(watch.id!);
+    final inWish = wishlist.isWishlisted(watch.id!);
     Map<String, dynamic> specs = {};
-    try { specs = jsonDecode(watch.specs); } catch (_) {}
+    try {
+      specs = jsonDecode(watch.specs);
+    } catch (_) {}
 
     return Scaffold(
       body: CustomScrollView(
@@ -120,7 +130,9 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
               background: Stack(
                 fit: StackFit.expand,
                 children: [
-                  Image.network(watch.imageUrl, fit: BoxFit.cover,
+                  Image.network(
+                    watch.imageUrl,
+                    fit: BoxFit.cover,
                     errorBuilder: (_, __, ___) => Container(
                       color: AppColors.darkSurface,
                       child: const Icon(Icons.watch_outlined,
@@ -131,7 +143,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                     decoration: const BoxDecoration(
                       gradient: LinearGradient(
                         begin: Alignment.topCenter,
-                        end:   Alignment.bottomCenter,
+                        end: Alignment.bottomCenter,
                         colors: [Colors.transparent, AppColors.dark],
                       ),
                     ),
@@ -146,14 +158,17 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                 onPressed: () async {
                   if (auth.userId == null) return;
                   await wishlist.toggle(auth.userId!, watch.id!);
-                  if (mounted) AppHelpers.showSnackBar(context,
-                    inWish ? AppStrings.removedFromWishlist : AppStrings.addedToWishlist,
-                    isSuccess: !inWish);
+                  if (mounted)
+                    AppHelpers.showSnackBar(
+                        context,
+                        inWish
+                            ? AppStrings.removedFromWishlist
+                            : AppStrings.addedToWishlist,
+                        isSuccess: !inWish);
                 },
               ),
             ],
           ),
-
           SliverToBoxAdapter(
             child: Padding(
               padding: const EdgeInsets.all(AppSpacing.lg),
@@ -161,8 +176,10 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   // Brand & Name
-                  Text(watch.brand, style: AppTextStyles.bodyMedium.copyWith(
-                      color: AppColors.primaryLight, fontWeight: FontWeight.w600)),
+                  Text(watch.brand,
+                      style: AppTextStyles.bodyMedium.copyWith(
+                          color: AppColors.primaryLight,
+                          fontWeight: FontWeight.w600)),
                   const SizedBox(height: AppSpacing.xs),
                   Text(watch.name, style: AppTextStyles.heading2),
                   const SizedBox(height: AppSpacing.sm),
@@ -171,27 +188,42 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                   Row(
                     children: [
                       RatingBarIndicator(
-                        rating:    watch.rating,
-                        itemSize:  18,
-                        itemBuilder: (_, __) =>
-                            const Icon(Icons.star_rounded, color: AppColors.warning),
+                        rating: watch.rating,
+                        itemSize: 18,
+                        itemBuilder: (_, __) => const Icon(Icons.star_rounded,
+                            color: AppColors.warning),
                       ),
                       const SizedBox(width: AppSpacing.sm),
-                      Text('${watch.rating} (${watch.reviewCount} reviews)',
-                          style: AppTextStyles.caption),
+                      GestureDetector(
+                        onTap: () => Navigator.pushNamed(
+                          context,
+                          '/reviews',
+                          arguments: {'watchId': watch.id, 'watch': watch},
+                        ),
+                        child: Text(
+                          '${watch.rating} (${watch.reviewCount} reviews)',
+                          style: AppTextStyles.caption.copyWith(
+                            color: AppColors.primaryLight,
+                            decoration: TextDecoration.underline,
+                          ),
+                        ),
+                      ),
                       const Spacer(),
                       Container(
                         padding: const EdgeInsets.symmetric(
                             horizontal: AppSpacing.sm, vertical: 4),
                         decoration: BoxDecoration(
-                          color: AppHelpers.getStockColor(watch.stock).withOpacity(0.15),
+                          color: AppHelpers.getStockColor(watch.stock)
+                              .withOpacity(0.15),
                           borderRadius: BorderRadius.circular(AppRadius.sm),
                           border: Border.all(
-                              color: AppHelpers.getStockColor(watch.stock), width: 0.5),
+                              color: AppHelpers.getStockColor(watch.stock),
+                              width: 0.5),
                         ),
                         child: Text(AppHelpers.getStockLabel(watch.stock),
                             style: TextStyle(
-                              fontSize: 11, fontWeight: FontWeight.w600,
+                              fontSize: 11,
+                              fontWeight: FontWeight.w600,
                               color: AppHelpers.getStockColor(watch.stock),
                             )),
                       ),
@@ -200,7 +232,8 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                   const SizedBox(height: AppSpacing.md),
 
                   // Price
-                  Text(AppHelpers.formatPrice(watch.price), style: AppTextStyles.price),
+                  Text(AppHelpers.formatPrice(watch.price),
+                      style: AppTextStyles.price),
                   const SizedBox(height: AppSpacing.lg),
                   const Divider(),
                   const SizedBox(height: AppSpacing.md),
@@ -216,21 +249,22 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                     const Text('Specifications', style: AppTextStyles.heading3),
                     const SizedBox(height: AppSpacing.sm),
                     ...specs.entries.map((e) => Padding(
-                      padding: const EdgeInsets.only(bottom: AppSpacing.sm),
-                      child: Row(
-                        children: [
-                          SizedBox(
-                            width: 130,
-                            child: Text(e.key, style: AppTextStyles.caption),
+                          padding: const EdgeInsets.only(bottom: AppSpacing.sm),
+                          child: Row(
+                            children: [
+                              SizedBox(
+                                width: 130,
+                                child:
+                                    Text(e.key, style: AppTextStyles.caption),
+                              ),
+                              Expanded(
+                                child: Text(e.value.toString(),
+                                    style: AppTextStyles.bodyMedium.copyWith(
+                                        color: AppColors.textPrimary)),
+                              ),
+                            ],
                           ),
-                          Expanded(
-                            child: Text(e.value.toString(),
-                                style: AppTextStyles.bodyMedium.copyWith(
-                                    color: AppColors.textPrimary)),
-                          ),
-                        ],
-                      ),
-                    )),
+                        )),
                   ],
 
                   // Reviews Section
@@ -248,9 +282,14 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                         underline: const SizedBox.shrink(),
                         style: AppTextStyles.caption,
                         items: const [
-                          DropdownMenuItem(value: 'Newest',          child: Text('Newest')),
-                          DropdownMenuItem(value: 'Most Helpful',    child: Text('Most Helpful')),
-                          DropdownMenuItem(value: 'Highest Rating',  child: Text('Top Rated')),
+                          DropdownMenuItem(
+                              value: 'Newest', child: Text('Newest')),
+                          DropdownMenuItem(
+                              value: 'Most Helpful',
+                              child: Text('Most Helpful')),
+                          DropdownMenuItem(
+                              value: 'Highest Rating',
+                              child: Text('Top Rated')),
                         ],
                         onChanged: (v) {
                           setState(() => _reviewSort = v!);
@@ -272,29 +311,31 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text('Write a Review', style: AppTextStyles.bodyLarge),
+                        const Text('Write a Review',
+                            style: AppTextStyles.bodyLarge),
                         const SizedBox(height: AppSpacing.sm),
                         RatingBar.builder(
-                          minRating:   1,
-                          itemSize:    28,
-                          glow:        false,
-                          itemBuilder: (_, __) =>
-                              const Icon(Icons.star_rounded, color: AppColors.warning),
-                          onRatingUpdate: (r) => setState(() => _userRating = r),
+                          minRating: 1,
+                          itemSize: 28,
+                          glow: false,
+                          itemBuilder: (_, __) => const Icon(Icons.star_rounded,
+                              color: AppColors.warning),
+                          onRatingUpdate: (r) =>
+                              setState(() => _userRating = r),
                         ),
                         const SizedBox(height: AppSpacing.sm),
                         TextField(
                           controller: _reviewCtrl,
-                          maxLines:   3,
+                          maxLines: 3,
                           decoration: const InputDecoration(
-                            hintText:    'Share your experience...',
-                            filled:      true,
+                            hintText: 'Share your experience...',
+                            filled: true,
                           ),
                         ),
                         const SizedBox(height: AppSpacing.sm),
                         ElevatedButton(
                           onPressed: _submitReview,
-                          child:     const Text('SUBMIT REVIEW'),
+                          child: const Text('SUBMIT REVIEW'),
                         ),
                       ],
                     ),
@@ -302,7 +343,8 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                   const SizedBox(height: AppSpacing.md),
 
                   // Reviews list
-                  ..._reviews.map((r) => _ReviewTile(review: r, db: _db, onHelpful: _load)),
+                  ..._reviews.map(
+                      (r) => _ReviewTile(review: r, db: _db, onHelpful: _load)),
 
                   const SizedBox(height: AppSpacing.xxl),
                 ],
@@ -327,7 +369,8 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
             ),
             child: _addingCart
                 ? const SizedBox(
-                    height: 20, width: 20,
+                    height: 20,
+                    width: 20,
                     child: CircularProgressIndicator(
                         strokeWidth: 2, color: AppColors.dark))
                 : Text(watch.stock == 0 ? 'OUT OF STOCK' : 'ADD TO CART'),
@@ -339,10 +382,11 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
 }
 
 class _ReviewTile extends StatelessWidget {
-  final Review       review;
+  final Review review;
   final DatabaseHelper db;
   final VoidCallback onHelpful;
-  const _ReviewTile({required this.review, required this.db, required this.onHelpful});
+  const _ReviewTile(
+      {required this.review, required this.db, required this.onHelpful});
 
   @override
   Widget build(BuildContext context) {
@@ -363,7 +407,8 @@ class _ReviewTile extends StatelessWidget {
                 radius: 16,
                 backgroundColor: AppColors.primary.withOpacity(0.3),
                 child: Text(review.userName[0].toUpperCase(),
-                    style: const TextStyle(color: AppColors.primaryLight,
+                    style: const TextStyle(
+                        color: AppColors.primaryLight,
                         fontWeight: FontWeight.w700)),
               ),
               const SizedBox(width: AppSpacing.sm),
@@ -371,16 +416,17 @@ class _ReviewTile extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(review.userName, style: AppTextStyles.bodyMedium.copyWith(
-                        color: AppColors.textPrimary)),
+                    Text(review.userName,
+                        style: AppTextStyles.bodyMedium
+                            .copyWith(color: AppColors.textPrimary)),
                     Text(AppHelpers.formatDate(review.createdAt),
                         style: AppTextStyles.caption),
                   ],
                 ),
               ),
               RatingBarIndicator(
-                rating:    review.rating,
-                itemSize:  14,
+                rating: review.rating,
+                itemSize: 14,
                 itemBuilder: (_, __) =>
                     const Icon(Icons.star_rounded, color: AppColors.warning),
               ),

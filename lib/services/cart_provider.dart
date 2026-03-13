@@ -1,8 +1,3 @@
-// lib/services/cart_provider.dart
-// ─────────────────────────────────────────────
-// Shopping cart state management
-// ─────────────────────────────────────────────
-
 import 'package:flutter/foundation.dart';
 import '../models/cart_item.dart';
 import 'database_helper.dart';
@@ -10,14 +5,14 @@ import 'database_helper.dart';
 class CartProvider extends ChangeNotifier {
   final DatabaseHelper _db = DatabaseHelper();
 
-  List<CartItem> _items    = [];
-  bool           _isLoading = false;
+  List<CartItem> _items = [];
+  bool _isLoading = false;
 
-  List<CartItem> get items      => _items;
-  bool           get isLoading  => _isLoading;
-  int            get itemCount  => _items.fold(0, (sum, i) => sum + i.quantity);
-  double         get totalPrice => _items.fold(0.0, (sum, i) => sum + i.totalPrice);
-  bool           get isEmpty    => _items.isEmpty;
+  List<CartItem> get items => _items;
+  bool get isLoading => _isLoading;
+  int get itemCount => _items.fold(0, (sum, i) => sum + i.quantity);
+  double get totalPrice => _items.fold(0.0, (sum, i) => sum + i.totalPrice);
+  bool get isEmpty => _items.isEmpty;
 
   // ── Load cart for user ────────────────────────
   Future<void> loadCart(int userId) async {

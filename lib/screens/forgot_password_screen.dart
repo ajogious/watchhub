@@ -1,4 +1,3 @@
-// lib/screens/forgot_password_screen.dart
 import 'package:flutter/material.dart';
 import '../utils/constants.dart';
 import '../utils/helpers.dart';
@@ -10,9 +9,9 @@ class ForgotPasswordScreen extends StatefulWidget {
 }
 
 class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
-  final _formKey   = GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormState>();
   final _emailCtrl = TextEditingController();
-  bool _sent       = false;
+  bool _sent = false;
 
   @override
   void dispose() {
@@ -38,8 +37,8 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
       body: Padding(
         padding: const EdgeInsets.all(AppSpacing.lg),
         child: _sent
-            ? _SuccessView(email: _emailCtrl.text,
-                onBack: () => Navigator.pop(context))
+            ? _SuccessView(
+                email: _emailCtrl.text, onBack: () => Navigator.pop(context))
             : Form(
                 key: _formKey,
                 child: Column(
@@ -62,11 +61,11 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                     ),
                     const SizedBox(height: AppSpacing.xl),
                     TextFormField(
-                      controller:   _emailCtrl,
+                      controller: _emailCtrl,
                       keyboardType: TextInputType.emailAddress,
                       decoration: const InputDecoration(
-                        labelText:   'Email Address',
-                        prefixIcon:  Icon(Icons.email_outlined),
+                        labelText: 'Email Address',
+                        prefixIcon: Icon(Icons.email_outlined),
                       ),
                       validator: AppHelpers.validateEmail,
                     ),

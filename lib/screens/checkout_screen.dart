@@ -1,4 +1,3 @@
-// lib/screens/checkout_screen.dart
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../services/auth_provider.dart';
@@ -13,10 +12,10 @@ class CheckoutScreen extends StatefulWidget {
 }
 
 class _CheckoutScreenState extends State<CheckoutScreen> {
-  final _formKey  = GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormState>();
   final _addrCtrl = TextEditingController();
   final _cityCtrl = TextEditingController();
-  bool  _placing  = false;
+  bool _placing = false;
 
   @override
   void dispose() {
@@ -29,8 +28,8 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
     if (!_formKey.currentState!.validate()) return;
     setState(() => _placing = true);
 
-    final auth    = context.read<AuthProvider>();
-    final cart    = context.read<CartProvider>();
+    final auth = context.read<AuthProvider>();
+    final cart = context.read<CartProvider>();
     final address = '${_addrCtrl.text}, ${_cityCtrl.text}';
 
     final success = await cart.placeOrder(auth.userId!, address);
@@ -39,10 +38,13 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
     setState(() => _placing = false);
 
     if (success) {
-      AppHelpers.showSnackBar(context, '🎉 Order placed successfully!', isSuccess: true);
+      AppHelpers.showSnackBar(context, '🎉 Order placed successfully!',
+          isSuccess: true);
       Navigator.of(context).pushNamedAndRemoveUntil('/home', (r) => false);
     } else {
-      AppHelpers.showSnackBar(context, 'Failed to place order. Please try again.', isError: true);
+      AppHelpers.showSnackBar(
+          context, 'Failed to place order. Please try again.',
+          isError: true);
     }
   }
 
@@ -60,18 +62,18 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
             const Text('Shipping Details', style: AppTextStyles.heading3),
             const SizedBox(height: AppSpacing.md),
             TextFormField(
-              controller:  _addrCtrl,
+              controller: _addrCtrl,
               decoration: const InputDecoration(
-                labelText:  'Street Address',
+                labelText: 'Street Address',
                 prefixIcon: Icon(Icons.location_on_outlined),
               ),
               validator: (v) => AppHelpers.validateRequired(v, 'Address'),
             ),
             const SizedBox(height: AppSpacing.md),
             TextFormField(
-              controller:  _cityCtrl,
+              controller: _cityCtrl,
               decoration: const InputDecoration(
-                labelText:  'City',
+                labelText: 'City',
                 prefixIcon: Icon(Icons.location_city_outlined),
               ),
               validator: (v) => AppHelpers.validateRequired(v, 'City'),
@@ -93,11 +95,13 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
             ElevatedButton(
               onPressed: _placing ? null : _placeOrder,
               child: _placing
-                ? const SizedBox(
-                    height: 20, width: 20,
-                    child: CircularProgressIndicator(strokeWidth: 2, color: AppColors.dark),
-                  )
-                : const Text('PLACE ORDER'),
+                  ? const SizedBox(
+                      height: 20,
+                      width: 20,
+                      child: CircularProgressIndicator(
+                          strokeWidth: 2, color: AppColors.dark),
+                    )
+                  : const Text('PLACE ORDER'),
             ),
           ],
         ),

@@ -1,8 +1,3 @@
-// lib/utils/app_theme.dart
-// ─────────────────────────────────────────────
-// Global ThemeData for WatchHub (dark luxury theme)
-// ─────────────────────────────────────────────
-
 import 'package:flutter/material.dart';
 import 'constants.dart';
 
@@ -15,14 +10,14 @@ class AppTheme {
 
       // ── Color Scheme ──────────────────────────
       colorScheme: const ColorScheme.dark(
-        primary:   AppColors.primary,
+        primary: AppColors.primary,
         secondary: AppColors.accent,
-        surface:   AppColors.darkSurface,
-        error:     AppColors.error,
+        surface: AppColors.darkSurface,
+        error: AppColors.error,
         onPrimary: AppColors.dark,
         onSecondary: AppColors.dark,
         onSurface: AppColors.textPrimary,
-        onError:   AppColors.textPrimary,
+        onError: AppColors.textPrimary,
       ),
 
       // ── AppBar ────────────────────────────────
