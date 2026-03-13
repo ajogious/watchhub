@@ -145,7 +145,7 @@ class _DashboardTab extends StatelessWidget {
           physics: const NeverScrollableScrollPhysics(),
           crossAxisSpacing: AppSpacing.md,
           mainAxisSpacing: AppSpacing.md,
-          childAspectRatio: 1.6,
+          childAspectRatio: 1.35,
           children: [
             _StatCard('Users', stats['users'] ?? 0,
                 Icons.people_outline_rounded, AppColors.primaryLight),
@@ -239,9 +239,9 @@ class _StatCard extends StatelessWidget {
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Icon(icon, color: color, size: 22),
+          const Spacer(),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
