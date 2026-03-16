@@ -1,8 +1,3 @@
-// lib/screens/feedback_screen.dart
-// ─────────────────────────────────────────────
-// Feedback form — issue report + general feedback
-// ─────────────────────────────────────────────
-
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import '../utils/constants.dart';
@@ -17,14 +12,14 @@ class FeedbackScreen extends StatefulWidget {
 }
 
 class _FeedbackScreenState extends State<FeedbackScreen> {
-  final _formKey     = GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormState>();
   final _subjectCtrl = TextEditingController();
-  final _bodyCtrl    = TextEditingController();
+  final _bodyCtrl = TextEditingController();
 
-  _FeedbackType _type      = _FeedbackType.general;
-  double        _appRating = 0;
-  bool          _submitted = false;
-  bool          _sending   = false;
+  _FeedbackType _type = _FeedbackType.general;
+  double _appRating = 0;
+  bool _submitted = false;
+  bool _sending = false;
 
   @override
   void dispose() {
@@ -38,44 +33,54 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
     setState(() => _sending = true);
     // Simulate sending
     await Future.delayed(const Duration(milliseconds: 1200));
-    if (mounted) setState(() { _sending = false; _submitted = true; });
+    if (mounted)
+      setState(() {
+        _sending = false;
+        _submitted = true;
+      });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Send Feedback')),
-      body: _submitted ? _SuccessView() : _FormView(
-        formKey:     _formKey,
-        subjectCtrl: _subjectCtrl,
-        bodyCtrl:    _bodyCtrl,
-        type:        _type,
-        appRating:   _appRating,
-        sending:     _sending,
-        onTypeChange:  (t) => setState(() => _type = t),
-        onRating:      (r) => setState(() => _appRating = r),
-        onSubmit:      _submit,
-      ),
+      body: _submitted
+          ? _SuccessView()
+          : _FormView(
+              formKey: _formKey,
+              subjectCtrl: _subjectCtrl,
+              bodyCtrl: _bodyCtrl,
+              type: _type,
+              appRating: _appRating,
+              sending: _sending,
+              onTypeChange: (t) => setState(() => _type = t),
+              onRating: (r) => setState(() => _appRating = r),
+              onSubmit: _submit,
+            ),
     );
   }
 }
 
 class _FormView extends StatelessWidget {
-  final GlobalKey<FormState>     formKey;
-  final TextEditingController    subjectCtrl;
-  final TextEditingController    bodyCtrl;
-  final _FeedbackType            type;
-  final double                   appRating;
-  final bool                     sending;
+  final GlobalKey<FormState> formKey;
+  final TextEditingController subjectCtrl;
+  final TextEditingController bodyCtrl;
+  final _FeedbackType type;
+  final double appRating;
+  final bool sending;
   final void Function(_FeedbackType) onTypeChange;
-  final void Function(double)    onRating;
-  final VoidCallback             onSubmit;
+  final void Function(double) onRating;
+  final VoidCallback onSubmit;
 
   const _FormView({
-    required this.formKey,    required this.subjectCtrl,
-    required this.bodyCtrl,   required this.type,
-    required this.appRating,  required this.sending,
-    required this.onTypeChange, required this.onRating,
+    required this.formKey,
+    required this.subjectCtrl,
+    required this.bodyCtrl,
+    required this.type,
+    required this.appRating,
+    required this.sending,
+    required this.onTypeChange,
+    required this.onRating,
     required this.onSubmit,
   });
 
@@ -98,30 +103,38 @@ class _FormView extends StatelessWidget {
               ),
               child: Column(
                 children: [
-                  const Text('Rate Your Experience',
-                      style: AppTextStyles.heading3),
+                  const Text(
+                    'Rate Your Experience',
+                    style: AppTextStyles.heading3,
+                  ),
                   const SizedBox(height: AppSpacing.xs),
-                  const Text('How would you rate WatchHub overall?',
-                      style: AppTextStyles.bodyMedium),
+                  const Text(
+                    'How would you rate WatchHub overall?',
+                    style: AppTextStyles.bodyMedium,
+                  ),
                   const SizedBox(height: AppSpacing.md),
                   RatingBar.builder(
                     minRating: 1,
-                    itemSize:  42,
-                    glow:      false,
+                    itemSize: 42,
+                    glow: false,
                     unratedColor: AppColors.divider,
                     itemBuilder: (_, i) => Icon(
-                      i < 3 ? Icons.sentiment_satisfied_alt_rounded
-                            : Icons.star_rounded,
+                      i < 3
+                          ? Icons.sentiment_satisfied_alt_rounded
+                          : Icons.star_rounded,
                       color: AppColors.warning,
                     ),
                     onRatingUpdate: onRating,
                   ),
                   if (appRating > 0) ...[
                     const SizedBox(height: AppSpacing.sm),
-                    Text(_ratingText(appRating),
-                        style: const TextStyle(
-                            color: AppColors.warning,
-                            fontWeight: FontWeight.w600)),
+                    Text(
+                      _ratingText(appRating),
+                      style: const TextStyle(
+                        color: AppColors.warning,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
                   ],
                 ],
               ),
@@ -129,11 +142,15 @@ class _FormView extends StatelessWidget {
             const SizedBox(height: AppSpacing.lg),
 
             // ── Type selector ────────────────────
-            const Text('Feedback Type',
-                style: TextStyle(
-                  fontSize: 13, fontWeight: FontWeight.w700,
-                  color: AppColors.textSecondary, letterSpacing: 0.5,
-                )),
+            const Text(
+              'Feedback Type',
+              style: TextStyle(
+                fontSize: 13,
+                fontWeight: FontWeight.w700,
+                color: AppColors.textSecondary,
+                letterSpacing: 0.5,
+              ),
+            ),
             const SizedBox(height: AppSpacing.sm),
             Wrap(
               spacing: AppSpacing.sm,
@@ -144,29 +161,37 @@ class _FormView extends StatelessWidget {
                   child: AnimatedContainer(
                     duration: const Duration(milliseconds: 150),
                     padding: const EdgeInsets.symmetric(
-                        horizontal: AppSpacing.md, vertical: AppSpacing.sm),
+                      horizontal: AppSpacing.md,
+                      vertical: AppSpacing.sm,
+                    ),
                     decoration: BoxDecoration(
-                      color: selected
-                          ? AppColors.primary : AppColors.darkCard,
+                      color: selected ? AppColors.primary : AppColors.darkCard,
                       borderRadius: BorderRadius.circular(AppRadius.full),
                       border: Border.all(
-                          color: selected
-                              ? AppColors.primary : AppColors.divider),
+                        color: selected ? AppColors.primary : AppColors.divider,
+                      ),
                     ),
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Icon(_typeIcon(t),
-                            size: 14,
-                            color: selected
-                                ? AppColors.dark : AppColors.textSecondary),
+                        Icon(
+                          _typeIcon(t),
+                          size: 14,
+                          color: selected
+                              ? AppColors.dark
+                              : AppColors.textSecondary,
+                        ),
                         const SizedBox(width: 4),
-                        Text(_typeLabel(t),
-                            style: TextStyle(
-                              fontSize: 13, fontWeight: FontWeight.w600,
-                              color: selected
-                                  ? AppColors.dark : AppColors.textPrimary,
-                            )),
+                        Text(
+                          _typeLabel(t),
+                          style: TextStyle(
+                            fontSize: 13,
+                            fontWeight: FontWeight.w600,
+                            color: selected
+                                ? AppColors.dark
+                                : AppColors.textPrimary,
+                          ),
+                        ),
                       ],
                     ),
                   ),
@@ -176,11 +201,15 @@ class _FormView extends StatelessWidget {
             const SizedBox(height: AppSpacing.lg),
 
             // ── Subject ──────────────────────────
-            const Text('Subject',
-                style: TextStyle(
-                  fontSize: 13, fontWeight: FontWeight.w700,
-                  color: AppColors.textSecondary, letterSpacing: 0.5,
-                )),
+            const Text(
+              'Subject',
+              style: TextStyle(
+                fontSize: 13,
+                fontWeight: FontWeight.w700,
+                color: AppColors.textSecondary,
+                letterSpacing: 0.5,
+              ),
+            ),
             const SizedBox(height: AppSpacing.xs),
             TextFormField(
               controller: subjectCtrl,
@@ -194,16 +223,20 @@ class _FormView extends StatelessWidget {
             const SizedBox(height: AppSpacing.md),
 
             // ── Message ──────────────────────────
-            const Text('Message',
-                style: TextStyle(
-                  fontSize: 13, fontWeight: FontWeight.w700,
-                  color: AppColors.textSecondary, letterSpacing: 0.5,
-                )),
+            const Text(
+              'Message',
+              style: TextStyle(
+                fontSize: 13,
+                fontWeight: FontWeight.w700,
+                color: AppColors.textSecondary,
+                letterSpacing: 0.5,
+              ),
+            ),
             const SizedBox(height: AppSpacing.xs),
             TextFormField(
-              controller:  bodyCtrl,
-              maxLines:    6,
-              maxLength:   1000,
+              controller: bodyCtrl,
+              maxLines: 6,
+              maxLength: 1000,
               decoration: const InputDecoration(
                 hintText:
                     'Please share the details of your feedback or issue...',
@@ -226,14 +259,22 @@ class _FormView extends StatelessWidget {
                 onPressed: sending ? null : onSubmit,
                 child: sending
                     ? const SizedBox(
-                        height: 20, width: 20,
+                        height: 20,
+                        width: 20,
                         child: CircularProgressIndicator(
-                            strokeWidth: 2, color: AppColors.dark))
-                    : const Text('SEND FEEDBACK',
+                          strokeWidth: 2,
+                          color: AppColors.dark,
+                        ),
+                      )
+                    : const Text(
+                        'SEND FEEDBACK',
                         style: TextStyle(
-                          fontSize: 15, fontWeight: FontWeight.w800,
-                          letterSpacing: 1, color: AppColors.dark,
-                        )),
+                          fontSize: 15,
+                          fontWeight: FontWeight.w800,
+                          letterSpacing: 1,
+                          color: AppColors.dark,
+                        ),
+                      ),
               ),
             ),
             const SizedBox(height: AppSpacing.xl),
@@ -245,19 +286,27 @@ class _FormView extends StatelessWidget {
 
   String _typeLabel(_FeedbackType t) {
     switch (t) {
-      case _FeedbackType.general: return 'General';
-      case _FeedbackType.bug:     return 'Bug Report';
-      case _FeedbackType.feature: return 'Feature Request';
-      case _FeedbackType.other:   return 'Other';
+      case _FeedbackType.general:
+        return 'General';
+      case _FeedbackType.bug:
+        return 'Bug Report';
+      case _FeedbackType.feature:
+        return 'Feature Request';
+      case _FeedbackType.other:
+        return 'Other';
     }
   }
 
   IconData _typeIcon(_FeedbackType t) {
     switch (t) {
-      case _FeedbackType.general: return Icons.comment_outlined;
-      case _FeedbackType.bug:     return Icons.bug_report_outlined;
-      case _FeedbackType.feature: return Icons.lightbulb_outline_rounded;
-      case _FeedbackType.other:   return Icons.more_horiz_rounded;
+      case _FeedbackType.general:
+        return Icons.comment_outlined;
+      case _FeedbackType.bug:
+        return Icons.bug_report_outlined;
+      case _FeedbackType.feature:
+        return Icons.lightbulb_outline_rounded;
+      case _FeedbackType.other:
+        return Icons.more_horiz_rounded;
     }
   }
 
@@ -282,15 +331,21 @@ class _SuccessView extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Container(
-              width: 100, height: 100,
+              width: 100,
+              height: 100,
               decoration: BoxDecoration(
                 color: AppColors.success.withOpacity(0.12),
                 shape: BoxShape.circle,
                 border: Border.all(
-                    color: AppColors.success.withOpacity(0.4), width: 2),
+                  color: AppColors.success.withOpacity(0.4),
+                  width: 2,
+                ),
               ),
-              child: const Icon(Icons.check_rounded,
-                  size: 52, color: AppColors.success),
+              child: const Icon(
+                Icons.check_rounded,
+                size: 52,
+                color: AppColors.success,
+              ),
             ),
             const SizedBox(height: AppSpacing.lg),
             const Text('Feedback Received!', style: AppTextStyles.heading2),

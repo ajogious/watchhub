@@ -1,9 +1,3 @@
-// lib/main.dart
-// ─────────────────────────────────────────────
-// WatchHub App Entry Point
-// Sets up providers, theme, and routing
-// ─────────────────────────────────────────────
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
